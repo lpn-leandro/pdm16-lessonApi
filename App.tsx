@@ -1,12 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import ThemeContextProvider, { useThemeContext } from './src/contexts/ThemeContext';
+import Header from './src/Header';
+import Content from './src/Content';
+
+function AppContent() {
+  const { theme, currentTheme } = useThemeContext();
+
+  return (
+    <View style={[styles.container,{ backgroundColor: currentTheme.backgroundColor}]}>
+      <Header />
+      <Content />
+    </View>
+  );
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeContextProvider>
+      <AppContent />
+    </ThemeContextProvider>
   );
 }
 
